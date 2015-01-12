@@ -12,7 +12,7 @@
     }
 
     function add($uuid, $reason) {
-        get_mysql()->query("insert into bans (uuid, date, reason) values ('$uuid', '" . date("Y-m-d H:i:s") . "', '$reason')");
+        get_mysql()->query("insert into bans (uuid, date, reason) values ('$uuid', '" . date("Y-m-d H:i:s") . "', '".get_mysql()->real_escape_string($reason)."')");
     }
 
     function remove($uuid) {
