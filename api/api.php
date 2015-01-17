@@ -2,7 +2,7 @@
     define("key", "KEY"); // TODO: Make key customizable.
 
     function get_mysql() {
-        $mysql = new mysqli("localhost", "root", "•••••", "banmanagement");
+        $mysql = new mysqli("localhost", "root", "•••••", "banmanagement"); // TODO: Remove password!
 
         if ($mysql->connect_error) {
             die($mysql->connect_error);
