@@ -2,8 +2,14 @@
     require("api.php");
 
     if (!isset($_POST["key"]) || $_POST["key"] != key) {
-        die("Incorrect key.");
+//        die("Incorrect key.");
     }
 
-    remove($_POST["uuid"]);
+    if (isset($_POST["uuid"])) {
+        remove($_POST["uuid"]);
+    }
+
+    else if (isset($_GET["id"])) {
+        remove_by_id($_GET["id"]);
+    }
 ?>

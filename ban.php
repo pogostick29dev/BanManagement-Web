@@ -6,9 +6,15 @@
     </head>
 
     <body>
+        <?php
+            require("api/api.php");
+
+            $ban = get_by_id($_GET["id"]);
+        ?>
+
         <div class="jumbotron">
             <div class="container">
-                <h1>Ban #1</h1>
+                <h1>Ban #<?php echo $ban["id"] ?></h1>
             </div>
         </div>
 
@@ -18,8 +24,8 @@
                     <div class="panel-heading">Manage</div>
                     <div class="panel-body">
                         <div class="form-inline">
-                            <input type="button" value="Edit" onclick="location.href = 'addban.php?id=1'" class="btn btn-warning"/>
-                            <input type="button" value="Delete" onclick="location.href = 'deleteban.php?id=1'" class="btn btn-danger"/>
+                            <input type="button" value="Edit" onclick="location.href = 'addban.php?id=<?php echo $ban["id"] ?>'" class="btn btn-warning"/>
+                            <input type="button" value="Delete" onclick="location.href = 'api/remove.php?id=<?php echo $ban["id"] ?>'" class="btn btn-danger"/>
                         </div>
                     </div>
                 </div>
@@ -34,9 +40,9 @@
                     </tr>
 
                     <tr>
-                        <td>----</td>
-                        <td>01/17/15 2:38 PM</td>
-                        <td>Griefing.</td>
+                        <td><?php echo $ban["uuid"] ?></td>
+                        <td><?php echo $ban["date"] ?></td>
+                        <td><?php echo $ban["reason"] ?></td>
                     </tr>
                 </table>
             </div>

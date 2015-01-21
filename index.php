@@ -6,6 +6,10 @@
     </head>
 
     <body>
+        <?php
+            require("api/api.php");
+        ?>
+
         <div class="jumbotron">
             <div class="container">
                 <h1>BanManagement</h1>
@@ -27,19 +31,20 @@
                     <th>Reason</th>
                 </tr>
 
-                <tr>
-                    <td><a href="ban.php?id=1">1</a></td>
-                    <td>----</td>
-                    <td>01/17/15 2:38 PM</td>
-                    <td>Griefing.</td>
-                </tr>
+                <?php
+                    $bans = get_bans();
 
-                <tr>
-                    <td><a href="ban.php?id=2">2</a></td>
-                    <td>----</td>
-                    <td>01/16/15 9:22 AM</td>
-                    <td>Advertising.</td>
-                </tr>
+                    while ($ban = $bans->fetch_assoc()) {
+                ?>
+                        <tr>
+                            <td><a href="ban.php?id=<?php echo $ban["id"] ?>"><?php echo $ban["id"] ?></a></td>
+                            <td><?php echo $ban["uuid"] ?></td>
+                            <td><?php echo $ban["date"] ?></td>
+                            <td><?php echo $ban["reason"] ?></td>
+                        </tr>
+                <?php
+                    }
+                ?>
             </table>
         </div>
     </body>
