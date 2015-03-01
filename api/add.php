@@ -7,11 +7,12 @@
 
     if (isset($_POST["id"])) {
         update($_POST["id"], $_POST["uuid"], $_POST["reason"]);
+        $id = $_POST["id"];
     }
 
     else {
-        add($_POST["uuid"], $_POST["reason"]);
+        $id = add($_POST["uuid"], $_POST["reason"]);
     }
 
-    header("Location: ../index.php");
+    echo $id;
 ?>

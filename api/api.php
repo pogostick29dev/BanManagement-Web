@@ -2,7 +2,7 @@
     define("key", "KEY"); // TODO: Make key customizable.
 
     function get_mysql() {
-        $mysql = new mysqli("localhost", "root", "", "banmanagement"); // TODO: Remove password!
+        $mysql = new mysqli("localhost", "root", "--", "banmanagement"); // TODO: Remove password!
 
         if ($mysql->connect_error) {
             die($mysql->connect_error);
@@ -12,7 +12,9 @@
     }
 
     function add($uuid, $reason) {
-        get_mysql()->query("insert into bans (uuid, date, reason) values ('$uuid', '" . date("Y-m-d H:i:s") . "', '$reason')");
+        $date = date("Y-m-d H:i:s");
+        get_mysql()->query("insert into bans (uuid, date, reason) values ('$uuid', '$date', '$reason')");
+        return get_mysql()->query("select id from bans where uuid = '$uuid' and date = '$date' and reason = '$reason'")->fetch_assoc()["id"];
     }
 
     function update($id, $uuid, $reason) {
@@ -37,5 +39,15 @@
 
     function get_bans() {
         return get_mysql()->query("select * from bans");
+    }
+
+    function login($username, $password) {
+        $password = hash("sha256", $password);
+        return get_mysql()->query("select count(*) from users where username = '$username' and password = '$password'")->num_rows > 0;
+    }
+
+    function register($username, $password) {
+        $password = hash("sha256", $password);
+        get_mysql()->query("insert into users (username, password) values ('$username', '$password')");
     }
 ?>

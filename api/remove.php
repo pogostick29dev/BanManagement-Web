@@ -12,4 +12,6 @@
     else if (isset($_GET["id"])) {
         remove_by_id($_GET["id"]);
     }
+
+    header("Location: ../index.php");
 ?>

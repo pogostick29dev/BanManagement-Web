@@ -18,7 +18,7 @@
         </div>
 
         <div class="container">
-            <input type="button" value="+" onclick="location.href = 'addban.php'" class="btn btn-primary pull-right"/>
+            <input type="button" value="+" data-toggle="modal" data-target="#modal" class="btn btn-primary pull-right"/>
             <br/><br/>
         </div>
 
@@ -47,5 +47,47 @@
                 ?>
             </table>
         </div>
+
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Add Ban</h4>
+                    </div>
+                    <form id="form">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="text" id="uuid" name="uuid" placeholder="UUID" class="form-control"/>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" id="reason" name="reason" placeholder="Reason" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#form").submit(function(e) {
+                    e.preventDefault();
+
+                    var uuid = $("#uuid").val();
+                    var reason = $("#reason").val();
+
+                    $.post("api/add.php", { uuid: uuid, reason: reason }, function(data) {
+                        location.href = "ban.php?id=" + data;
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

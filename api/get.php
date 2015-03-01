@@ -5,5 +5,5 @@
 //        die("Incorrect key.");
     }
 
-    echo(get($_POST["uuid"]));
+    echo(json_encode(get($_POST["uuid"])));
 ?>
