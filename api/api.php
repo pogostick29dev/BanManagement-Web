@@ -1,8 +1,8 @@
 <?php
-    define("key", "KEY"); // TODO: Make key customizable.
+    define("key", file_get_contents("../../key.txt"));
 
     function get_mysql() {
-        $mysql = new mysqli("localhost", "root", "--", "banmanagement"); // TODO: Remove password!
+        $mysql = new mysqli("localhost", "root", "", "banmanagement"); // TODO: Remove password!
 
         if ($mysql->connect_error) {
             die($mysql->connect_error);
