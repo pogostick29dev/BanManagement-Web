@@ -8,6 +8,7 @@
     <body>
         <?php
             require("api/api.php");
+            require("header.php");
         ?>
 
         <div class="jumbotron">
@@ -17,10 +18,12 @@
             </div>
         </div>
 
-        <div class="container">
-            <input type="button" value="+" data-toggle="modal" data-target="#modal" class="btn btn-primary pull-right"/>
-            <br/><br/>
-        </div>
+        <?php if (isset($_SESSION["username"])) { ?>
+            <div class="container">
+                <input type="button" value="+" data-toggle="modal" data-target="#modal" class="btn btn-primary pull-right"/>
+                <br/><br/>
+            </div>
+        <?php } ?>
 
         <div class="container">
             <table class="table table-bordered">
@@ -42,9 +45,7 @@
                             <td><?php echo $ban["date"] ?></td>
                             <td><?php echo $ban["reason"] ?></td>
                         </tr>
-                <?php
-                    }
-                ?>
+                <?php } ?>
             </table>
         </div>
 

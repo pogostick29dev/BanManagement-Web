@@ -8,6 +8,7 @@
     <body>
         <?php
             require("api/api.php");
+            require("header.php");
 
             $ban = get_by_id($_GET["id"]);
         ?>
@@ -19,19 +20,21 @@
         </div>
 
         <div class="container">
-            <div class="col-lg-2">
-                <div class="panel panel-warning">
-                    <div class="panel-heading">Manage</div>
-                    <div class="panel-body">
-                        <div class="form-inline">
-                            <input type="button" value="Edit" data-toggle="modal" data-target="#modal" class="btn btn-warning"/>
-                            <input type="button" value="Delete" onclick="location.href = 'api/remove.php?id=<?php echo $ban["id"] ?>'" class="btn btn-danger"/>
+            <?php if (isset($_SESSION["username"])) { ?>
+                <div class="col-lg-2">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">Manage</div>
+                        <div class="panel-body">
+                            <div class="form-inline">
+                                <input type="button" value="Edit" data-toggle="modal" data-target="#modal" class="btn btn-warning"/>
+                                <input type="button" value="Delete" onclick="location.href = 'api/remove.php?id=<?php echo $ban["id"] ?>'" class="btn btn-danger"/>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <?php } ?>
 
-            <div class="col-lg-10">
+            <div class="col-lg-<?php echo isset($_SESSION["username"]) ? 10 : 12 ?>">
                 <table class="table table-bordered">
                     <tr>
                         <th>UUID</th>

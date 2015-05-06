@@ -43,7 +43,7 @@
 
     function login($username, $password) {
         $password = hash("sha256", $password);
-        return get_mysql()->query("select count(*) from users where username = '$username' and password = '$password'")->num_rows > 0;
+        return get_mysql()->query("select count(*) from users where username = '$username' and password = '$password'")->fetch_assoc()["count(*)"] > 0;
     }
 
     function register($username, $password) {

@@ -1,10 +1,22 @@
 <?php
     require("api.php");
+    session_start();
 
-    if (!isset($_POST["key"]) || $_POST["key"] != key) {
+    $auth = false;
+
+    if (isset($_SESSION["username"])) {
+        $auth = true;
+    }
+
+    if (isset($_POST["key"]) && $_POST["key"] == key) {
+        $auth = true;
+    }
+
+    if (!$auth) {
         echo("key");
         return;
     }
 
-    echo(json_encode(get($_POST["uuid"])));
+    $data = get($_POST["uuid"]);
+    echo(json_encode($data != null ? $data : array()));
 ?>
